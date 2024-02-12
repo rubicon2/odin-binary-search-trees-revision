@@ -7,4 +7,19 @@ class BinaryTreeNode {
   }
 }
 
-export default class BinarySearchTree {}
+export default class BinarySearchTree {
+  static buildTree(arr) {
+    if (!arr.length) return null;
+    const middle = Math.floor(arr.length / 2);
+    return new BinaryTreeNode(
+      arr[middle],
+      BinarySearchTree.buildTree(arr.slice(0, middle)),
+      BinarySearchTree.buildTree(arr.slice(middle + 1)),
+    );
+  }
+
+  constructor(arr) {
+    const sorted = arr.sort((a, b) => a > b);
+    this.root = BinarySearchTree.buildTree(sorted);
+  }
+}
