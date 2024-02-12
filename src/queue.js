@@ -6,7 +6,7 @@ export default class Queue {
   }
 
   dequeue() {
-    return this.#queuedItems.shift();
+    return this.#queuedItems.shift() || null;
   }
 
   get length() {
