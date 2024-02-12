@@ -18,6 +18,27 @@ export default class BinarySearchTree {
     );
   }
 
+  static prettyPrint(node, prefix = '', isLeft = true) {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      BinarySearchTree.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? '│   ' : '    '}`,
+        false,
+      );
+    }
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+    if (node.left !== null) {
+      BinarySearchTree.prettyPrint(
+        node.left,
+        `${prefix}${isLeft ? '    ' : '│   '}`,
+        true,
+      );
+    }
+  }
+
   constructor(arr) {
     const allUniqueValues = [];
     /* eslint-disable no-restricted-syntax */
