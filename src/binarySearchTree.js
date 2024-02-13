@@ -39,6 +39,22 @@ export default class BinarySearchTree {
     }
   }
 
+  static getSmallestValueNode(startNode) {
+    let currentNode = startNode;
+    while (currentNode.left) {
+      currentNode = currentNode.left;
+    }
+    return currentNode;
+  }
+
+  static getLargestValueNode(startNode) {
+    let currentNode = startNode;
+    while (currentNode.right) {
+      currentNode = currentNode.right;
+    }
+    return currentNode;
+  }
+
   constructor(arr) {
     const allUniqueValues = [];
     /* eslint-disable no-restricted-syntax */
