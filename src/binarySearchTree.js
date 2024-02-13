@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 class BinaryTreeNode {
-  constructor(data, leftNode, rightNode) {
+  constructor(data, leftNode = null, rightNode = null) {
     this.data = data;
     this.left = leftNode;
     this.right = rightNode;
