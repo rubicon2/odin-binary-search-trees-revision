@@ -49,4 +49,25 @@ export default class BinarySearchTree {
     const sorted = allUniqueValues.sort((a, b) => a > b);
     this.root = BinarySearchTree.buildTree(sorted);
   }
+
+  insert(data) {
+    let currentNode = this.root;
+    while (currentNode) {
+      // Duplicate values are not permitted in binary search trees
+      if (data === currentNode.data) break;
+      if (data < currentNode.data) {
+        if (currentNode.left) currentNode = currentNode.left;
+        else {
+          currentNode.left = new BinaryTreeNode(data);
+          break;
+        }
+      } else if (data > currentNode.data) {
+        if (currentNode.right) currentNode = currentNode.right;
+        else {
+          currentNode.right = new BinaryTreeNode(data);
+          break;
+        }
+      }
+    }
+  }
 }
