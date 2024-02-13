@@ -1,4 +1,7 @@
-/* eslint-disable max-classes-per-file */
+/* eslint-disable  */
+import Queue from './queue';
+import Stack from './stack';
+
 class BinaryTreeNode {
   constructor(data, leftNode = null, rightNode = null) {
     this.data = data;
@@ -84,6 +87,17 @@ export default class BinarySearchTree {
           break;
         }
       }
+    }
+  }
+
+  levelOrder(callback) {
+    const queue = new Queue();
+    queue.enqueue(this.root);
+    while (queue.length) {
+      const currentNode = queue.dequeue();
+      if (currentNode.left) queue.enqueue(currentNode.left);
+      if (currentNode.right) queue.enqueue(currentNode.right);
+      callback(currentNode);
     }
   }
 }
