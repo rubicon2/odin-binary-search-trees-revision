@@ -94,25 +94,27 @@ export default class BinarySearchTree {
     if (data < currentNode.data) {
       // If currentNode.left is the one we need to delete, deleteRec will return null
       // but if it isn't the one we need to delete, deleteRec will return currentNode.left unchanged
-      currentNode.left = this.deleteRec(data, currentNode.left);
+      currentNode.left = this.delete(data, currentNode.left);
     } else if (data > currentNode.data) {
-      currentNode.right = this.deleteRec(data, currentNode.right);
+      currentNode.right = this.delete(data, currentNode.right);
     } else {
       // currentNode must be what we're looking for
       if (currentNode.left && currentNode.right) {
         const leftLargest = BinarySearchTree.getLargestValueNode(
           currentNode.left,
         );
-        this.deleteRec(leftLargest.data, currentNode);
+        this.delete(leftLargest.data, currentNode);
         currentNode.data = leftLargest.data;
         return currentNode;
       } else if (!currentNode.left && !currentNode.right) {
         if (currentNode === this.root) this.root = null;
         else return null;
       } else if (!currentNode.right) {
-        return currentNode.left;
+        if (currentNode === this.root) this.root = currentNode.left;
+        else return currentNode.left;
       } else if (!currentNode.left) {
-        return currentNode.right;
+        if (currentNode === this.root) this.root = currentNode.right;
+        else return currentNode.right;
       }
     }
     // If current node is not the one we want to delete, just return it to the parent unchanged
