@@ -1,6 +1,5 @@
 /* eslint-disable  */
 import Queue from './queue';
-import Stack from './stack';
 
 class BinaryTreeNode {
   constructor(data, leftNode = null, rightNode = null) {
