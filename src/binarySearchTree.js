@@ -160,4 +160,34 @@ export default class BinarySearchTree {
     }
   }
 
+  preOrder(callback, currentNode = this.root) {
+    if (callback) {
+      if (!currentNode) return;
+      callback(currentNode);
+      this.preOrder(callback, currentNode.left);
+      this.preOrder(callback, currentNode.right);
+    } else {
+      if (!currentNode) return [];
+      const treeValues = [currentNode.data];
+      treeValues.push(...this.preOrder(null, currentNode.left));
+      treeValues.push(...this.preOrder(null, currentNode.right));
+      return treeValues;
+    }
+  }
+
+  postOrder(callback, currentNode = this.root) {
+    if (callback) {
+      if (!currentNode) return;
+      this.postOrder(callback, currentNode.left);
+      this.postOrder(callback, currentNode.right);
+      callback(currentNode);
+    } else {
+      if (!currentNode) return [];
+      const treeValues = [];
+      treeValues.push(...this.postOrder(null, currentNode.left));
+      treeValues.push(...this.postOrder(null, currentNode.right));
+      treeValues.push(currentNode.data);
+      return treeValues;
+    }
+  }
 }
