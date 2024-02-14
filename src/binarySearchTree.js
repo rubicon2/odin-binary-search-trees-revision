@@ -184,6 +184,17 @@ export default class BinarySearchTree {
     return currentNode;
   }
 
+  find(data) {
+    let currentNode = this.root;
+    while (currentNode) {
+      if (data === currentNode.data) return currentNode;
+      else if (data < currentNode.data) currentNode = currentNode.left;
+      else currentNode = currentNode.right;
+    }
+    // If not found
+    return null;
+  }
+
   levelOrder(callback) {
     const queue = new Queue();
     queue.enqueue(this.root);
