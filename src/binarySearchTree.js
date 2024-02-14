@@ -204,4 +204,17 @@ export default class BinarySearchTree {
       return treeValues;
     }
   }
+
+  depth(node) {
+    let currentNode = this.root;
+    let level = 0;
+    while (currentNode) {
+      if (node === currentNode) return level;
+      if (node.data < currentNode.data) currentNode = currentNode.left;
+      else if (node.data > currentNode.data) currentNode = currentNode.right;
+      level += 1;
+    }
+    // If node is somehow not within binary search tree
+    return null;
+  }
 }
