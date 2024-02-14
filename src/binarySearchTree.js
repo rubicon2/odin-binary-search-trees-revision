@@ -205,6 +205,13 @@ export default class BinarySearchTree {
     }
   }
 
+  height(node) {
+    if (!node) return -1;
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+    return leftHeight > rightHeight ? 1 + leftHeight : 1 + rightHeight;
+  }
+
   depth(node) {
     let currentNode = this.root;
     let level = 0;
