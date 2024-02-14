@@ -133,6 +133,8 @@ export default class BinarySearchTree {
   }
 
   levelOrder(callback) {
+    // If all nodes have been deleted
+    if (!this.root) return null;
     // Would be more concise to have one version of loop but I prefer to do
     // one 'if (callback)' at the start of the function instead of sprinkled throughout.
     // Is more consistent with other traversal functions and easier to read, I think.
@@ -158,6 +160,8 @@ export default class BinarySearchTree {
   }
 
   inOrder(callback, currentNode = this.root) {
+    // If all nodes have been deleted
+    if (!this.root) return null;
     if (callback) {
       if (!currentNode) return;
       this.inOrder(callback, currentNode.left);
@@ -174,6 +178,8 @@ export default class BinarySearchTree {
   }
 
   preOrder(callback, currentNode = this.root) {
+    // If all nodes have been deleted
+    if (!this.root) return null;
     if (callback) {
       if (!currentNode) return;
       callback(currentNode);
@@ -189,6 +195,8 @@ export default class BinarySearchTree {
   }
 
   postOrder(callback, currentNode = this.root) {
+    // If all nodes have been deleted
+    if (!this.root) return null;
     if (callback) {
       if (!currentNode) return;
       this.postOrder(callback, currentNode.left);
