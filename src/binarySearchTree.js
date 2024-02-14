@@ -134,13 +134,27 @@ export default class BinarySearchTree {
   }
 
   levelOrder(callback) {
+    // Would be more concise to have one version of loop but I prefer to do
+    // one 'if (callback)' at the start of the function instead of sprinkled throughout.
+    // Is more consistent with other traversal functions and easier to read, I think.
     const queue = new Queue();
     queue.enqueue(this.root);
-    while (queue.length) {
-      const currentNode = queue.dequeue();
-      if (currentNode.left) queue.enqueue(currentNode.left);
-      if (currentNode.right) queue.enqueue(currentNode.right);
-      callback(currentNode);
+    if (callback) {
+      while (queue.length) {
+        const currentNode = queue.dequeue();
+        if (currentNode.left) queue.enqueue(currentNode.left);
+        if (currentNode.right) queue.enqueue(currentNode.right);
+        callback(currentNode);
+      }
+    } else {
+      const treeValues = [];
+      while (queue.length) {
+        const currentNode = queue.dequeue();
+        if (currentNode.left) queue.enqueue(currentNode.left);
+        if (currentNode.right) queue.enqueue(currentNode.right);
+        treeValues.push(currentNode.data);
+      }
+      return treeValues;
     }
   }
 
