@@ -224,4 +224,21 @@ export default class BinarySearchTree {
     // If node is somehow not within binary search tree
     return null;
   }
+
+  isBalanced() {
+    const allNodes = [];
+    this.inOrder((node) => {
+      allNodes.push(node);
+    });
+    for (const node of allNodes) {
+      const leftHeight = this.height(node.left);
+      const rightHeight = this.height(node.right);
+      if (Math.abs(leftHeight - rightHeight) > 1) return false;
+    }
+    return true;
+  }
+
+  rebalance() {
+    this.root = BinarySearchTree.buildTree(this.inOrder());
+  }
 }
