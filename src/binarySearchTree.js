@@ -59,11 +59,9 @@ export default class BinarySearchTree {
 
   constructor(arr) {
     const allUniqueValues = [];
-    /* eslint-disable no-restricted-syntax */
     for (const item of arr) {
       if (!allUniqueValues.includes(item)) allUniqueValues.push(item);
     }
-    /* eslint-enable no-restricted-syntax */
     const sorted = allUniqueValues.sort((a, b) => a > b);
     this.root = BinarySearchTree.buildTree(sorted);
   }
