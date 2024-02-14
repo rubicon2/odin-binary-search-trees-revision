@@ -90,6 +90,68 @@ export default class BinarySearchTree {
     }
   }
 
+  delete(data) {
+    let currentNode = this.root;
+    let parentNode = null;
+    while (currentNode) {
+      // If this is the node we are looking for...
+      if (data === currentNode.data) {
+        // If there are no children
+        if (!currentNode.left && !currentNode.right) {
+          // All this stuff about parent node sucks
+          if (parentNode) {
+            if (currentNode === parentNode.left) parentNode.left = null;
+            else parentNode.right = null;
+          } else {
+            // If there is no parent, this must be the root we are trying to delete
+            this.root = null;
+          }
+        }
+
+        // If there is one child
+        else if (!currentNode.right) {
+          if (parentNode) {
+            if (currentNode === parentNode.left)
+              parentNode.left = currentNode.left;
+            else parentNode.right = currentNode.left;
+          } else {
+            this.root = currentNode.left;
+          }
+        } else if (!currentNode.left) {
+          if (parentNode) {
+            if (currentNode === parentNode.left)
+              parentNode.left = currentNode.right;
+            else parentNode.right = currentNode.right;
+          } else {
+            this.root = currentNode.right;
+          }
+        }
+
+        // If there are two children
+        else {
+          // Copy value from largest node in left subtree - this will be a node with at most one child
+          const leftLargest = BinarySearchTree.getLargestValueNode(
+            currentNode.left,
+          );
+          // Delete that node as it only has one child
+          this.delete(leftLargest.data);
+          // Put data in currentNode
+          currentNode.data = leftLargest.data;
+        }
+        break;
+      }
+
+      // If we need to keep looking
+      if (data < currentNode.data) {
+        parentNode = currentNode;
+        currentNode = currentNode.left;
+      } else if (data > currentNode.data) {
+        parentNode = currentNode;
+        currentNode = currentNode.right;
+      }
+    }
+  }
+
   levelOrder(callback) {
     const queue = new Queue();
     queue.enqueue(this.root);
